@@ -35,19 +35,6 @@ export default function Program() {
                 <img src={features} alt="" />
               </div>
               <div className="block-right">
-                <h2>БАССЕЙН</h2>
-                <p>
-                  Плавание в бассейне гармонично развивает все группы мышц,
-                  укрепляет суставы и помогает поддерживать тело в тонусе.
-                </p>
-                <a href="">Оставить заявку</a>
-              </div>
-            </div>
-            <div className="block">
-              <div className="block-left">
-                <img src={features} alt="" />
-              </div>
-              <div className="block-right">
                 <h2>ТРЕНАЖЕРНЫЙ ЗАЛ</h2>
                 <p>
                   Поможет поддерживать тело в нужном тонусе и избежать многих
@@ -87,13 +74,24 @@ export default function Program() {
                 <img src={features} alt="" />
               </div>
               <div className="block-right">
-                <h2>
-                  ЗОНА ДЛЯ ФУНКЦИОНАЛЬНЫХ <br /> ТРЕНИРОВОК
-                </h2>
+                <h2>ЗОНА ЕДИНОБОРСТВ</h2>
                 <p>
-                  Это повысит эффективность упражнений и позволит достичь цели в
-                  короткий срок.
+                  Развивают выносливость,ловкость и координацию движений. Секции
+                  единоборств нацелены на укрепление и набор мышечной массы.
                 </p>
+                <a href="">Оставить заявку</a>
+              </div>
+            </div>
+            <div className="block">
+              <div className="block-left">
+                <img src={features} alt="" />
+              </div>
+              <div className="block-right">
+                <h2>
+                  ЗОНА ДЛЯ ФУНКЦИОНАЛЬНЫХ <br />
+                  ТРЕНИРОВОК
+                </h2>
+                <p>Укрепление физической формы и повышение выносливости.</p>
                 <a href="">Оставить заявку</a>
               </div>
             </div>
