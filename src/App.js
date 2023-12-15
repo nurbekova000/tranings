@@ -5,6 +5,7 @@ import Program from "./pages/program/program";
 import Register from "./pages/register/Register";
 import TeamProfi from "./pages/teamProfi/TeamProfi";
 import Training from "./pages/training/Training";
+import Map from "./pages/map/Map";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Register />
       <Training />
       <TeamProfi />
+      <Map />
     </>
   );
 }

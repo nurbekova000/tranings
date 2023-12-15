@@ -1,0 +1,62 @@
+.map-rigth {
+  background: url("../../../assets/images/contact-bg.jpg") no-repeat right/cover;
+  width: 1000px;
+  min-height: 40vh;
+}
+
+.map-content {
+  display: flex;
+}
+
+.input-group {
+  width: 800px;
+  height: 480.5px;
+  border-radius: 5px;
+  background: #878686;
+}
+
+.inputs-top input {
+  width: 345px;
+  height: 40px;
+  padding: 10px 11px;
+  border: 1px solid #ddd;
+  background: #fff;
+  outline: none;
+  margin-bottom: 40px;
+}
+.inputs-top {
+  display: flex;
+  gap: 30px;
+}
+.input-mid input {
+  width: 720px;
+  height: 40px;
+  padding: 10px 11px;
+  outline: none;
+}
+.input-group {
+  padding: 50px 40px;
+}
+.input-bottom input {
+  width: 720px;
+  height: 150px;
+  margin-top: 35px;
+  outline: none;
+}
+.input-group Button {
+  margin-top: 30px;
+}
+.map-rigth {
+  display: flex;
+  justify-content: center;
+  padding-top: 40px;
+}
+.map p {
+  color: #232d39;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.map span {
+  color: #ed563b;
+}

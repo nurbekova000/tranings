@@ -128,9 +128,9 @@ const TeamProfi = () => {
               </div>
               <div className="block-trener">
                 <img src={trener1} alt="" />
-                <p>Тренер групповых программ</p>
+                <p>Тренер по единоборствам</p>
 
-                <h2>Анастасия Карамышева</h2>
+                <h2>Тимур Денисов</h2>
 
                 <div className="icon-group">
                   <svg
@@ -236,9 +236,9 @@ const TeamProfi = () => {
               </div>
               <div className="block-trener">
                 <img src={trener2} alt="" />
-                <p>Тренер групповых программ</p>
+                <p>Тренер тренажерного зала</p>
 
-                <h2>Анастасия Карамышева</h2>
+                <h2>Марина Фиткулина</h2>
 
                 <div className="icon-group">
                   <svg
