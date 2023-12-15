@@ -52,7 +52,7 @@ export default function Header() {
             </a>
             <Button>Регистрация</Button>
           </div>
-          <div className="block lg:hidden text-[40px]" onClick={showMobileMenu}>
+          <div className="menu-button  text-[40px]" onClick={showMobileMenu}>
             <RiMenu2Line />
           </div>
           {isModile && <MobileMenu />}
