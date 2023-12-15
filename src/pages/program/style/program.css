@@ -22,3 +22,12 @@
   font-weight: 500;
   line-height: 19.5px; /* 150% */
 }
+.bottom-content {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 50px;
+}
+
+.program {
+  padding: 30px 0;
+}
