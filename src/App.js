@@ -2,6 +2,8 @@ import "./App.css";
 import Header from "./components/header/Header";
 import Home from "./pages/home/Home";
 import Program from "./pages/program/program";
+import Register from "./pages/register/Register";
+import Training from "./pages/training/Training";
 
 function App() {
   return (
@@ -9,6 +11,8 @@ function App() {
       <Header />
       <Home />
       <Program />
+      <Register />
+      <Training />
     </>
   );
 }
