@@ -3,6 +3,7 @@ import Header from "./components/header/Header";
 import Home from "./pages/home/Home";
 import Program from "./pages/program/program";
 import Register from "./pages/register/Register";
+import TeamProfi from "./pages/teamProfi/TeamProfi";
 import Training from "./pages/training/Training";
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
       <Program />
       <Register />
       <Training />
+      <TeamProfi />
     </>
   );
 }
