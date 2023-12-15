@@ -30,6 +30,73 @@ export default function Program() {
                 <a href="">Оставить заявку</a>
               </div>
             </div>
+            <div className="block">
+              <div className="block-left">
+                <img src={features} alt="" />
+              </div>
+              <div className="block-right">
+                <h2>БАССЕЙН</h2>
+                <p>
+                  Плавание в бассейне гармонично развивает все группы мышц,
+                  укрепляет суставы и помогает поддерживать тело в тонусе.
+                </p>
+                <a href="">Оставить заявку</a>
+              </div>
+            </div>
+            <div className="block">
+              <div className="block-left">
+                <img src={features} alt="" />
+              </div>
+              <div className="block-right">
+                <h2>ТРЕНАЖЕРНЫЙ ЗАЛ</h2>
+                <p>
+                  Поможет поддерживать тело в нужном тонусе и избежать многих
+                  проблем со здоровьем.
+                </p>
+                <a href="">Оставить заявку</a>
+              </div>
+            </div>
+            <div className="block">
+              <div className="block-left">
+                <img src={features} alt="" />
+              </div>
+              <div className="block-right">
+                <h2>ЗОНА КАРДИО ТРЕНАЖЁРОВ</h2>
+                <p>
+                  Развивают дыхательную систему,повышают выносливость и помогают
+                  похудеть.
+                </p>
+                <a href="">Оставить заявку</a>
+              </div>
+            </div>
+            <div className="block">
+              <div className="block-left">
+                <img src={features} alt="" />
+              </div>
+              <div className="block-right">
+                <h2>ЗАЛЫ ГРУППОВЫХ ТРЕНИРОВОК</h2>
+                <p>
+                  Это повысит эффективность упражнений и позволит достичь цели в
+                  короткий срок.
+                </p>
+                <a href="">Оставить заявку</a>
+              </div>
+            </div>
+            <div className="block">
+              <div className="block-left">
+                <img src={features} alt="" />
+              </div>
+              <div className="block-right">
+                <h2>
+                  ЗОНА ДЛЯ ФУНКЦИОНАЛЬНЫХ <br /> ТРЕНИРОВОК
+                </h2>
+                <p>
+                  Это повысит эффективность упражнений и позволит достичь цели в
+                  короткий срок.
+                </p>
+                <a href="">Оставить заявку</a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
