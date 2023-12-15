@@ -1,0 +1,24 @@
+.block {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+.block p {
+  max-width: 400px;
+  color: #7a7a7a;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 25px; /* 178.571% */
+}
+.block h2 {
+  color: #232d39;
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: 0.25px;
+}
+.block a {
+  color: #ed563b;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 19.5px; /* 150% */
+}
