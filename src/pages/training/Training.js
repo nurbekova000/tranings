@@ -39,7 +39,7 @@ const Training = () => {
 
   return (
     <div>
-      <div id="training">
+      <div id="traning">
         <div className="container">
           <div className="training">
             <div className="training-top">

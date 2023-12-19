@@ -1,6 +1,7 @@
 import "./style/home.css";
 import Button from "../../components/ui/button/Button";
 import bgVideo from "../../assets/images/gym-video.mp4";
+import { Link } from "react-router-dom";
 
 export default function Header() {
   return (
@@ -20,8 +21,12 @@ export default function Header() {
               здоровое<span className="text-red-500">тело</span>
             </h1>
             <div className="btn-group flex gap-1 justify-center ">
-              <Button>становиться участником</Button>
-              <Button>Дома фитнес</Button>
+              <a href="#map">
+                <Button>становиться участником</Button>
+              </a>
+              <a href="#map">
+                <Button>Дома фитнес</Button>
+              </a>
             </div>
           </div>
         </div>

@@ -1,19 +1,28 @@
 import React, { useEffect, useState } from "react";
 import Button from "../ui/button/Button";
 import { RiMenu2Line } from "react-icons/ri";
+import { Link } from "react-router-dom";
 
 import "./style/header.css";
 import MobileMenu from "./MobileMenu";
 
 export default function Header() {
   const [isModile, setMobile] = useState(false);
+  const [scroll, setScroll] = useState(0);
 
   function showMobileMenu() {
     setMobile((prev) => !prev);
   }
 
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      console.log(window.scrollY);
+      setScroll(window.scrollY);
+    });
+  });
+
   return (
-    <div id="header">
+    <div id="header" style={{ background: scroll > 520 && "white" }}>
       <div className="container">
         <div className=" flex justify-between items-center">
           <a className="text-[#ED563B] font-black text-[32px] uppercase">
@@ -23,34 +32,34 @@ export default function Header() {
             <a
               href="#"
               className="text-[13px] text-white font-medium uppercase"
+              style={{ color: scroll > 520 && "black" }}
             >
               Дом
             </a>
             <a
-              href="#"
+              href="#programing"
               className="text-[13px] text-white font-medium uppercase"
+              style={{ color: scroll > 520 && "black" }}
             >
               Программа
             </a>
             <a
-              href="#"
+              href="#traning"
               className="text-[13px] text-white font-medium uppercase"
+              style={{ color: scroll > 520 && "black" }}
             >
               тренировка
             </a>
             <a
               href="#"
               className="text-[13px] text-white font-medium uppercase"
-            >
-              Росписание
-            </a>
-            <a
-              href="#"
-              className="text-[13px] text-white font-medium uppercase"
+              style={{ color: scroll > 520 && "black" }}
             >
               Контакт
             </a>
-            <Button>Регистрация</Button>
+            <Link to="/registration">
+              <Button>Регистрация</Button>
+            </Link>
           </div>
           <div className="menu-button  text-[40px]" onClick={showMobileMenu}>
             <RiMenu2Line />
