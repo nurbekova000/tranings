@@ -34,19 +34,24 @@ const data = [
       "Никакой связи между тренировкой пресса и жиром на животе нет. Но, тем не менее, пресс качать необходимо и нужно, потому что упражнения для мышц брюшного пресса повышают приток крови к внутренним органам, нормализуют кровообращение и артериальное давление, улучшают работу пищеварительного тракта.",
   },
 ];
-const Training = () => {
+const Training = ({ admin = false }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   return (
     <div>
       <div id="traning">
         <div className="container">
-          <div className="training">
-            <div className="training-top">
-              <h1>Тренировка</h1>
-              <img src={topImg} alt="" />
-              <p>Здесь выберите для себя!</p>
-            </div>
+          <div
+            className="training"
+            style={{ padding: !admin ? "125px 0" : "0" }}
+          >
+            {!admin && (
+              <div className="training-top">
+                <h1>Тренировка</h1>
+                <img src={topImg} alt="" />
+                <p>Здесь выберите для себя!</p>
+              </div>
+            )}
             <div className="training-bottom flex justify-between gap-[60px]">
               <div className="training-left flex flex-col gap-[20px]">
                 {data.map((el, index) => (
@@ -66,9 +71,11 @@ const Training = () => {
                     </h4>
                   </div>
                 ))}
-                <button className="py-[20px] bg-[#ED563B] text-[19px] text-white font-semibold rounded-md">
-                  запись к нам!
-                </button>
+                {!admin && (
+                  <button className="py-[20px] bg-[#ED563B] text-[19px] text-white font-semibold rounded-md">
+                    запись к нам!
+                  </button>
+                )}
               </div>
               <div className="flex flex-col gap-[20px] items-start">
                 <img className="w-full" src={data[currentIndex].img} alt="" />
