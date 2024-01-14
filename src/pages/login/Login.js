@@ -1,11 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../../components/ui/button/Button";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import Loading from "../../components/loading/Loading";
 
 export default function Login() {
   const [authenticationValue, setAuthenticationValue] = useState({});
+  const [isLoading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const authToken = localStorage.getItem("auth_token");
+
+    if (authToken) {
+      navigate("/training");
+    }
+  }, []);
 
   function onChnage(e) {
     const { value, name } = e.target;
@@ -14,7 +24,8 @@ export default function Login() {
   }
 
   function onSubmit(e) {
-    fetch("https://aocurse.pythonanywhere.com/auth/token/login/", {
+    setLoading(true);
+    fetch("https://training.pythonanywhere.com/auth/token/login/", {
       method: "POST",
       body: JSON.stringify(authenticationValue),
       headers: {
@@ -24,6 +35,7 @@ export default function Login() {
       .then((data) => data.json())
       .then((data) => {
         if (data.auth_token) {
+          setLoading(false);
           localStorage.setItem("auth_token", data.auth_token);
           localStorage.setItem("email", authenticationValue.email);
           navigate("/training");
@@ -66,6 +78,7 @@ export default function Login() {
           </Link>
         </div>
       </div>
+      {isLoading && <Loading />}
     </div>
   );
 }

@@ -1,12 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../../components/ui/button/Button";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import Loading from "../../components/loading/Loading";
 
 export default function Authentication() {
   const [authenticationValue, setAuthenticationValue] = useState({});
+  const [isLoading, setLoading] = useState(false);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const authToken = localStorage.getItem("auth_token");
+
+    if (authToken) {
+      navigate("/training");
+    }
+  }, []);
+
   function onChnage(e) {
     const { value, name } = e.target;
 
@@ -14,7 +25,8 @@ export default function Authentication() {
   }
 
   function onSubmit(e) {
-    fetch("https://aocurse.pythonanywhere.com/auth/users/", {
+    setLoading(true);
+    fetch("https://training.pythonanywhere.com/auth/users/", {
       method: "POST",
       body: JSON.stringify({
         ...authenticationValue,
@@ -26,8 +38,8 @@ export default function Authentication() {
     })
       .then((data) => data.json())
       .then(() => {
-        fetch("https://aocurse.pythonanywhere.com/auth/token/login/", {
-          method: "GET",
+        fetch("https://training.pythonanywhere.com/auth/token/login/", {
+          method: "POST",
           body: JSON.stringify(authenticationValue),
           headers: {
             "Content-Type": "application/json",
@@ -35,12 +47,12 @@ export default function Authentication() {
         })
           .then((data) => data.json())
           .then((data) => {
-            console.log(data);
-            // if (data.auth_token) {
-            //   localStorage.setItem("auth_token", data.auth_token);
-            //   localStorage.setItem("email", authenticationValue.email);
-            //   navigate("/training");
-            // }
+            if (data.auth_token) {
+              setLoading(false);
+              localStorage.setItem("auth_token", data.auth_token);
+              localStorage.setItem("email", authenticationValue.email);
+              navigate("/training");
+            }
           });
       });
   }
@@ -78,6 +90,7 @@ export default function Authentication() {
           </Link>
         </div>
       </div>
+      {isLoading && <Loading />}
     </div>
   );
 }
