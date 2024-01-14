@@ -15,7 +15,7 @@ export default function Login() {
     if (authToken) {
       navigate("/training");
     }
-  }, []);
+  }, [navigate]);
 
   function onChnage(e) {
     const { value, name } = e.target;

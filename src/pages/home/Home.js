@@ -1,7 +1,6 @@
 import "./style/home.css";
 import Button from "../../components/ui/button/Button";
 import bgVideo from "../../assets/images/gym-video.mp4";
-import { Link } from "react-router-dom";
 
 export default function Header() {
   return (

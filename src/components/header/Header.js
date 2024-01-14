@@ -25,12 +25,15 @@ export default function Header() {
     <div id="header" style={{ background: scroll > 520 && "white" }}>
       <div className="container">
         <div className=" flex justify-between items-center">
-          <a className="text-[#ED563B] font-black text-[32px] uppercase">
+          <a
+            className="text-[#ED563B] font-black text-[32px] uppercase"
+            href="/"
+          >
             Training
           </a>
           <div className=" xl:flex  items-center gap-[40px] lg:flex mg:hidden md:hidden sm:hidden s:hidden phone:hidden">
             <a
-              href="#"
+              href="/"
               className="text-[13px] text-white font-medium uppercase"
               style={{ color: scroll > 520 && "black" }}
             >
@@ -51,7 +54,7 @@ export default function Header() {
               тренировка
             </a>
             <a
-              href="#"
+              href="/#"
               className="text-[13px] text-white font-medium uppercase"
               style={{ color: scroll > 520 && "black" }}
             >

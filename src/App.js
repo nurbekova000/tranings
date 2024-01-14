@@ -4,7 +4,6 @@ import HomePage from "./pages/homePage/HomePage";
 import { Routes, Route } from "react-router-dom";
 import Login from "./pages/login/Login";
 import TrainingPage from "./pages/trainingPage/TrainingPage";
-import Loading from "./components/loading/Loading";
 
 function App() {
   return (

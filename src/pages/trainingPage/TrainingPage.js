@@ -12,7 +12,7 @@ export default function TrainingPage() {
     if (!authToken) {
       navigate("/");
     }
-  }, []);
+  }, [navigate]);
   return (
     <>
       <AdminHeader />

@@ -8,7 +8,7 @@ export default function MobileMenu() {
       {data.map((link, idx) => (
         <a
           className="text-[13px] text-black text-center font-medium uppercase py-3 border-y-[1px] border-gray-500 border-solid "
-          href="#"
+          href="/"
           key={idx}
         >
           {link}

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Button from "../../components/ui/button/Button";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import Loading from "../../components/loading/Loading";
 
 export default function Authentication() {
@@ -16,7 +15,7 @@ export default function Authentication() {
     if (authToken) {
       navigate("/training");
     }
-  }, []);
+  }, [navigate]);
 
   function onChnage(e) {
     const { value, name } = e.target;
