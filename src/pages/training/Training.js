@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "../../components/ui/button/Button";
 import topImg from "../../assets/images/line-dec.png";
 import tabsIcon from "../../assets/images/tabs-first-icon.png";
@@ -34,8 +35,17 @@ const data = [
       "Никакой связи между тренировкой пресса и жиром на животе нет. Но, тем не менее, пресс качать необходимо и нужно, потому что упражнения для мышц брюшного пресса повышают приток крови к внутренним органам, нормализуют кровообращение и артериальное давление, улучшают работу пищеварительного тракта.",
   },
 ];
-const Training = ({ admin = false }) => {
+
+const Training = ({ admin = false, data }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isTraning, setTraning] = useState(false);
+
+  const navigate = useNavigate();
+
+  function navigateToExercises(categoryId, exercisesId, el) {
+    navigate(`/training/category/${categoryId}/exercises/${exercisesId}`);
+    localStorage.setItem("exercises", JSON.stringify(el));
+  }
 
   return (
     <div>
@@ -52,11 +62,14 @@ const Training = ({ admin = false }) => {
                 <p>Здесь выберите для себя!</p>
               </div>
             )}
-            <div className="training-bottom flex justify-between gap-[60px]">
+            <div className="training-bottom flex  gap-[60px]">
               <div className="training-left flex flex-col gap-[20px]">
-                {data.map((el, index) => (
+                {data?.map((el, index) => (
                   <div
-                    onClick={() => setCurrentIndex(index)}
+                    onClick={() => {
+                      setCurrentIndex(index);
+                      setTraning(false);
+                    }}
                     className="w-[350px] traning-item flex items-center cursor-pointer gap-3 p-[30px]"
                     key={index}
                   >
@@ -77,19 +90,49 @@ const Training = ({ admin = false }) => {
                   </button>
                 )}
               </div>
-              <div className="flex flex-col gap-[20px] items-start">
-                <img className="w-full" src={data[currentIndex].img} alt="" />
-                <h2 className="text-[#232D39] text-[23px] font-bold capitalize">
-                  {data[currentIndex].name}
-                </h2>
-                <p
-                  className="text-[#7A7A7A] text-[14px]"
-                  style={{ lineHeight: "25px" }}
-                >
-                  {data[currentIndex].description}
-                </p>
-                <Button>Начать</Button>
-              </div>
+              {!isTraning && (
+                <div className="flex flex-col gap-[20px] items-start">
+                  <img
+                    className="w-full"
+                    src={data?.[currentIndex]?.photo}
+                    alt=""
+                  />
+                  <h2 className="text-[#232D39] text-[23px] font-bold capitalize">
+                    {data?.[currentIndex]?.name}
+                  </h2>
+                  <p
+                    className="text-[#7A7A7A] text-[14px]"
+                    style={{ lineHeight: "25px" }}
+                  >
+                    {data?.[currentIndex]?.description}
+                  </p>
+                  <Button onClick={() => setTraning(true)}>Начать</Button>
+                </div>
+              )}
+
+              {isTraning && (
+                <div className="flex items-start gap-3 ">
+                  {!!data?.[currentIndex]?.exercises.length ? (
+                    data?.[currentIndex]?.exercises?.map((el) => (
+                      <div
+                        className="w-[100px] py-5 px-5 bg-[#ED563B] text-white font-bold cursor-pointer"
+                        key={el.id}
+                        onClick={() =>
+                          navigateToExercises(
+                            data?.[currentIndex]?.id,
+                            el?.id,
+                            el
+                          )
+                        }
+                      >
+                        {el.day}
+                      </div>
+                    ))
+                  ) : (
+                    <h1 className="text-[30px]">Нет упражнений</h1>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </div>
