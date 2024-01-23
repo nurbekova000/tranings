@@ -9,6 +9,7 @@ export default function TrainingPage() {
   const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
   const [isLoading, setLoading] = useState(false);
+  const [exercises, setExercises] = useState([]);
 
   const authToken = localStorage.getItem("auth_token");
 
@@ -27,7 +28,18 @@ export default function TrainingPage() {
         .then((data) => {
           console.log(data);
           setCategories(data);
-          setLoading(false);
+
+          fetch(`https://training.pythonanywhere.com/api/exercises/`, {
+            headers: {
+              Authorization: `Token ${authToken}`,
+              Accept: "application/json",
+            },
+          })
+            .then((data) => data.json())
+            .then((data) => {
+              setExercises(data);
+              setLoading(false);
+            });
         });
     }
   }, [authToken]);
@@ -41,7 +53,7 @@ export default function TrainingPage() {
       ) : (
         <>
           <AdminHeader />
-          <Training admin={true} data={categories} />
+          <Training admin={true} data={categories} exercises={exercises} />
         </>
       )}
     </>

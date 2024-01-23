@@ -10,9 +10,20 @@ export default function Exercises() {
   const [exercises, setExercises] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [oneExercises, setOneExercises] = useState(null);
+  const authToken = localStorage.getItem("auth_token");
 
   useEffect(() => {
     setExercises(JSON.parse(localStorage.getItem("exercises")));
+    fetch(`https://training.pythonanywhere.com/api/exercises/${exercisesId}`, {
+      headers: {
+        Authorization: `Token ${authToken}`,
+        Accept: "application/json",
+      },
+    })
+      .then((data) => data.json())
+      .then((data) => {
+        console.log(data);
+      });
   }, []);
 
   console.log(oneExercises);

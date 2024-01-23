@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/ui/button/Button";
 import topImg from "../../assets/images/line-dec.png";
@@ -36,16 +36,41 @@ const data = [
   },
 ];
 
-const Training = ({ admin = false, data }) => {
+const Training = ({ admin = false, data, exercises }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTraning, setTraning] = useState(false);
+  const authToken = localStorage.getItem("auth_token");
+  const currentDate = new Date();
 
   const navigate = useNavigate();
 
   function navigateToExercises(categoryId, exercisesId, el) {
-    navigate(`/training/category/${categoryId}/exercises/${exercisesId}`);
     localStorage.setItem("exercises", JSON.stringify(el));
+
+    const newObj = new FormData();
+
+    newObj.append("exercise", exercisesId);
+
+    // fetch("https://training.pythonanywhere.com/api/enrollment/", {
+    //   method: "POST",
+    //   body: newObj,
+    //   headers: {
+    //     Authorization: `Token ${authToken}`,
+    //     Accept: "application/json",
+    //   },
+    // })
+    //   .then((data) => data.json())
+    //   .then((data) => {
+    //     console.log(data);
+
+    //     alert("Success");
+    //     navigate(`/training/category/${categoryId}/exercises/${exercisesId}`);
+    //   });
+
+    navigate(`/training/category/${categoryId}/exercises/${exercisesId}`);
   }
+
+  console.log("exercises", exercises);
 
   return (
     <div>
@@ -113,21 +138,55 @@ const Training = ({ admin = false, data }) => {
               {isTraning && (
                 <div className="flex items-start gap-3 ">
                   {!!data?.[currentIndex]?.exercises.length ? (
-                    data?.[currentIndex]?.exercises?.map((el) => (
-                      <div
-                        className="w-[100px] py-5 px-5 bg-[#ED563B] text-white font-bold cursor-pointer"
-                        key={el.id}
-                        onClick={() =>
-                          navigateToExercises(
-                            data?.[currentIndex]?.id,
-                            el?.id,
-                            el
-                          )
+                    data?.[currentIndex]?.exercises?.map((el, index) => {
+
+                      const isActive = exercises.some(
+                        (exercise) => exercise.id === el.id
+                      );
+                      const findExercise = exercises.find(
+                        (exercise) => exercise.id === el.id
+                      );
+
+                      console.log("findExercise", findExercise);
+
+                      const isNextActive = findExercise?.enrollments?.some(
+                        (enrollment) => {
+                          return (
+                            +enrollment.started_at.slice(
+                              enrollment.started_at.length - 2,
+                              enrollment.started_at.length
+                            ) !== currentDate.getDate()
+                          );
                         }
-                      >
-                        {el.day}
-                      </div>
-                    ))
+                      );
+
+                        data?.[currentIndex]?.exercises[index+1].isActive = true
+
+                      console.log("isNextActive", isNextActive);
+                      // || isActive || index === 0
+                      return (
+                        <div
+                          className="w-[100px] py-5 px-5 bg-[#ED563B] text-white font-bold cursor-pointer"
+                          style={{
+                            background:
+                              isNextActive ? "#ED563B" : "gray",
+                            cursor:
+                              isActive || index === 0 ? "pointer" : "no-drop",
+                          }}
+                          key={el.id}
+                          onClick={() =>
+                            (isActive || index === 0) &&
+                            navigateToExercises(
+                              data?.[currentIndex]?.id,
+                              el?.id,
+                              el
+                            )
+                          }
+                        >
+                          {el.day}
+                        </div>
+                      );
+                    })
                   ) : (
                     <h1 className="text-[30px]">Нет упражнений</h1>
                   )}
