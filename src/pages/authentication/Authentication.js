@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import Button from "../../components/ui/button/Button";
 import { Link, useNavigate } from "react-router-dom";
 import Loading from "../../components/loading/Loading";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+import axios from "axios";
 
 export default function Authentication() {
   const [authenticationValue, setAuthenticationValue] = useState({});
@@ -25,34 +29,54 @@ export default function Authentication() {
 
   function onSubmit(e) {
     setLoading(true);
-    fetch("https://training.pythonanywhere.com/auth/users/", {
-      method: "POST",
-      body: JSON.stringify({
-        ...authenticationValue,
-        re_password: authenticationValue.re_password,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((data) => data.json())
-      .then(() => {
-        fetch("https://training.pythonanywhere.com/auth/token/login/", {
-          method: "POST",
-          body: JSON.stringify(authenticationValue),
+    axios
+      .post(
+        "https://training.pythonanywhere.com/auth/users/",
+        {
+          ...authenticationValue,
+          re_password: authenticationValue.re_password,
+        },
+        {
           headers: {
             "Content-Type": "application/json",
           },
-        })
-          .then((data) => data.json())
-          .then((data) => {
-            if (data.auth_token) {
-              setLoading(false);
-              localStorage.setItem("auth_token", data.auth_token);
-              localStorage.setItem("email", authenticationValue.email);
-              navigate("/training");
-            }
-          });
+        }
+      )
+      .then((response) => {
+        console.log("response", response);
+        if (!response.status >= 200 && response.status < 300) {
+          // Если статус ответа не в диапазоне 200-299 (успех), считаем его ошибкой
+          throw new Error(JSON.stringify(response.data));
+        }
+        return response.data;
+      })
+      .then((data) => {
+        console.log("успех", data);
+        return axios.post(
+          "https://training.pythonanywhere.com/auth/token/login/",
+          authenticationValue,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+      })
+      .then((response) => {
+        const data = response.data;
+        if (data.auth_token) {
+          setLoading(false);
+          localStorage.setItem("auth_token", data.auth_token);
+          localStorage.setItem("email", authenticationValue.email);
+          navigate("/training");
+        }
+      })
+      .catch((error) => {
+        console.log("error", error.response.data.email[0]);
+        setLoading(false);
+
+        // Обработка ошибок здесь
+        toast.error(error.response.data.email[0]);
       });
   }
 
@@ -90,6 +114,7 @@ export default function Authentication() {
         </div>
       </div>
       {isLoading && <Loading />}
+      <ToastContainer />
     </div>
   );
 }

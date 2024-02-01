@@ -10,10 +10,13 @@ export default function Exercises() {
   const [exercises, setExercises] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [oneExercises, setOneExercises] = useState(null);
+  const [exercise, setExercise] = useState(null);
   const authToken = localStorage.getItem("auth_token");
 
   useEffect(() => {
     setExercises(JSON.parse(localStorage.getItem("exercises")));
+
+    // if (exercisesId === "1") {
     fetch(`https://training.pythonanywhere.com/api/exercises/${exercisesId}`, {
       headers: {
         Authorization: `Token ${authToken}`,
@@ -22,11 +25,13 @@ export default function Exercises() {
     })
       .then((data) => data.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
+        setExercise(data);
       });
+    // }
   }, []);
 
-  console.log(oneExercises);
+  console.log(exercise);
 
   return (
     <>
@@ -37,7 +42,7 @@ export default function Exercises() {
         </Link>
         <div className=" flex  gap-[120px] mt-8">
           <div className="flex flex-col gap-2">
-            {exercises?.exercise_sets?.map((el, index) => (
+            {exercise?.exercise_sets?.map((el, index) => (
               <div
                 className="w-[370px] bg-[#ED563B] px-4 py-3 flex justify-center cursor-pointer"
                 onClick={() => {
@@ -54,14 +59,14 @@ export default function Exercises() {
           </div>
           <div className="w-[577px] py-[50px] px-[30px] bg-[#FFEAEA]">
             <h2 className="text-[28px] font-bold pb-3">
-              {exercises?.nutritions?.name}
+              {exercise?.nutritions?.name}
             </h2>
             <img
-              src={exercises?.nutritions?.photo || defaultImage}
+              src={exercise?.nutritions?.photo || defaultImage}
               alt=""
               className="w-full pb-4"
             />
-            <p>{exercises?.nutritions?.description}</p>
+            <p>{exercise?.nutritions?.description}</p>
           </div>
         </div>
       </div>

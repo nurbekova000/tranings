@@ -3,6 +3,9 @@ import Button from "../../components/ui/button/Button";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../components/loading/Loading";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Login() {
   const [authenticationValue, setAuthenticationValue] = useState({});
@@ -25,14 +28,17 @@ export default function Login() {
 
   function onSubmit(e) {
     setLoading(true);
-    fetch("https://training.pythonanywhere.com/auth/token/login/", {
-      method: "POST",
-      body: JSON.stringify(authenticationValue),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((data) => data.json())
+    axios
+      .post(
+        "https://training.pythonanywhere.com/auth/token/login/",
+        authenticationValue,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((response) => response.data)
       .then((data) => {
         if (data.auth_token) {
           setLoading(false);
@@ -40,6 +46,11 @@ export default function Login() {
           localStorage.setItem("email", authenticationValue.email);
           navigate("/training");
         }
+      })
+      .catch((error) => {
+        setLoading(false);
+
+        toast.error(error.response.data.non_field_errors[0]);
       });
   }
   return (
@@ -79,6 +90,7 @@ export default function Login() {
         </div>
       </div>
       {isLoading && <Loading />}
+      <ToastContainer />
     </div>
   );
 }

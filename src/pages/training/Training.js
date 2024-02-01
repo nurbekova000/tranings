@@ -1,76 +1,54 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/ui/button/Button";
 import topImg from "../../assets/images/line-dec.png";
 import tabsIcon from "../../assets/images/tabs-first-icon.png";
-import triningImg1 from "../../assets/images/training-image-01.jpg";
-import triningImg2 from "../../assets/images/training-image-02.jpg";
-import triningImg3 from "../../assets/images/training-image-03.jpg";
-import triningImg4 from "../../assets/images/training-image-04.jpg";
 import "./style/training.css";
-
-const data = [
-  {
-    name: "йога",
-    img: triningImg4,
-    description:
-      "Снижает тревожность, избавляет от страхов, помогает расслабиться, улучшает общее самочувствие. Этот факт был научно подтвержден и доказан. Улучшает фигуру, снижает вес. Асаны оказывают комплексное влияние: ускоряют обмен веществ, благотворно влияют на пищеварение, укрепляют мышечный корсет.",
-  },
-  {
-    name: "для похудения",
-    img: triningImg3,
-    description:
-      "Одно из самых больших преимуществ утренних упражнений — резкое улучшение метаболизма. Организм даже по окончании тренировки продолжит сжигать калории и работать быстрее. После того как вы позавтракаете, ваше тело будет использовать потребленную пищу как источник энергии, а не накапливать лишний жир.",
-  },
-  {
-    name: "для набора веса",
-    img: triningImg1,
-    description:
-      "Обязательно включайте многосуставные движения, то есть те, что задействуют несколько суставов и групп мышц: приседания, выпады, становую тягу, жим лёжа и стоя и другие. Они тренируют всё тело, прокачивают координацию, позволяют работать с большими весами и дают нужный стимул для роста мускулов.",
-  },
-  {
-    name: "для пресса",
-    img: triningImg2,
-    description:
-      "Никакой связи между тренировкой пресса и жиром на животе нет. Но, тем не менее, пресс качать необходимо и нужно, потому что упражнения для мышц брюшного пресса повышают приток крови к внутренним органам, нормализуют кровообращение и артериальное давление, улучшают работу пищеварительного тракта.",
-  },
-];
 
 const Training = ({ admin = false, data, exercises }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTraning, setTraning] = useState(false);
-  const authToken = localStorage.getItem("auth_token");
-  const currentDate = new Date();
-
   const navigate = useNavigate();
+  const date = new Date();
 
   function navigateToExercises(categoryId, exercisesId, el) {
+    const authToken = localStorage.getItem("auth_token");
+
     localStorage.setItem("exercises", JSON.stringify(el));
+
+    localStorage.setItem("isEnrolment", JSON.stringify(!!exercises.length));
 
     const newObj = new FormData();
 
     newObj.append("exercise", exercisesId);
 
-    // fetch("https://training.pythonanywhere.com/api/enrollment/", {
-    //   method: "POST",
-    //   body: newObj,
-    //   headers: {
-    //     Authorization: `Token ${authToken}`,
-    //     Accept: "application/json",
-    //   },
-    // })
-    //   .then((data) => data.json())
-    //   .then((data) => {
-    //     console.log(data);
+    fetch("https://training.pythonanywhere.com/api/enrollment/", {
+      method: "POST",
+      body: newObj,
+      headers: {
+        Authorization: `Token ${authToken}`,
+        Accept: "application/json",
+      },
+    })
+      .then((data) => data.json())
+      .then((data) => {
+        console.log(data);
 
-    //     alert("Success");
-    //     navigate(`/training/category/${categoryId}/exercises/${exercisesId}`);
-    //   });
+        navigate(`/training/category/${categoryId}/exercises/${exercisesId}`);
+      });
+  }
+
+  function navigateToExercises2(categoryId, exercisesId, el) {
+    localStorage.setItem("exercises", JSON.stringify(el));
 
     navigate(`/training/category/${categoryId}/exercises/${exercisesId}`);
   }
 
-  console.log("exercises", exercises);
+  const yourExercises = exercises?.filter(
+    (el) => el.category === data[currentIndex].id
+  );
+
+  console.log("yourExercises", yourExercises);
 
   return (
     <div>
@@ -137,41 +115,68 @@ const Training = ({ admin = false, data, exercises }) => {
 
               {isTraning && (
                 <div className="flex items-start gap-3 ">
-                  {!!data?.[currentIndex]?.exercises.length ? (
-                    data?.[currentIndex]?.exercises?.map((el, index) => {
+                  {yourExercises.length ? (
+                    yourExercises.map((el, index) => {
+                      const day = el.started_at.slice(el.started_at.length - 2);
 
-                      const isActive = exercises.some(
-                        (exercise) => exercise.id === el.id
-                      );
-                      const findExercise = exercises.find(
-                        (exercise) => exercise.id === el.id
-                      );
-
-                      console.log("findExercise", findExercise);
-
-                      const isNextActive = findExercise?.enrollments?.some(
-                        (enrollment) => {
-                          return (
-                            +enrollment.started_at.slice(
-                              enrollment.started_at.length - 2,
-                              enrollment.started_at.length
-                            ) !== currentDate.getDate()
-                          );
-                        }
+                      const month = el.started_at.slice(
+                        el.started_at.length - 5,
+                        el.started_at.length - 3
                       );
 
-                        data?.[currentIndex]?.exercises[index+1].isActive = true
+                      console.log("CurrentDate", date.getDate());
+                      console.log("CurrentMonth", date.getMonth());
 
-                      console.log("isNextActive", isNextActive);
-                      // || isActive || index === 0
+                      console.log("isNextActive", +day);
+
+                      console.log("month", +month);
+
                       return (
                         <div
                           className="w-[100px] py-5 px-5 bg-[#ED563B] text-white font-bold cursor-pointer"
                           style={{
                             background:
-                              isNextActive ? "#ED563B" : "gray",
+                              index === 0 ||
+                              +month < date.getMonth() + 1 ||
+                              +day <= date.getDate() + 1
+                                ? "#ED563B"
+                                : "gray",
                             cursor:
-                              isActive || index === 0 ? "pointer" : "no-drop",
+                              index === 0 ||
+                              +month < date.getMonth() + 1 ||
+                              +day <= date.getDate() + 1
+                                ? "pointer"
+                                : "no-drop",
+                          }}
+                          key={el.id}
+                          onClick={() =>
+                            index === 0 ||
+                            +month < date.getMonth() + 1 ||
+                            +day <= date.getDate() + 1
+                              ? navigateToExercises2(
+                                  data?.[currentIndex]?.id,
+                                  el?.id,
+                                  el
+                                )
+                              : null
+                          }
+                        >
+                          {el.day}
+                        </div>
+                      );
+                    })
+                  ) : !!data?.[currentIndex]?.exercises.length ? (
+                    data?.[currentIndex]?.exercises?.map((el, index) => {
+                      const isActive = exercises.some(
+                        (exercise) => exercise.id === el.id
+                      );
+
+                      return (
+                        <div
+                          className="w-[100px] py-5 px-5 bg-[#ED563B] text-white font-bold cursor-pointer"
+                          style={{
+                            background: index === 0 ? "#ED563B" : "gray",
+                            cursor: index === 0 ? "pointer" : "no-drop",
                           }}
                           key={el.id}
                           onClick={() =>
