@@ -26,7 +26,6 @@ export default function TrainingPage() {
       })
         .then((data) => data.json())
         .then((data) => {
-          console.log(data);
           setCategories(data);
 
           fetch(`https://training.pythonanywhere.com/api/exercises/`, {
@@ -43,8 +42,6 @@ export default function TrainingPage() {
         });
     }
   }, [authToken]);
-
-  console.log(categories);
 
   return (
     <>

@@ -43,7 +43,6 @@ export default function Authentication() {
         }
       )
       .then((response) => {
-        console.log("response", response);
         if (!response.status >= 200 && response.status < 300) {
           // Если статус ответа не в диапазоне 200-299 (успех), считаем его ошибкой
           throw new Error(JSON.stringify(response.data));
@@ -51,7 +50,6 @@ export default function Authentication() {
         return response.data;
       })
       .then((data) => {
-        console.log("успех", data);
         return axios.post(
           "https://training.pythonanywhere.com/auth/token/login/",
           authenticationValue,
@@ -72,7 +70,6 @@ export default function Authentication() {
         }
       })
       .catch((error) => {
-        console.log("error", error.response.data.email[0]);
         setLoading(false);
 
         // Обработка ошибок здесь

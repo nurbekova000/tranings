@@ -32,8 +32,6 @@ const Training = ({ admin = false, data, exercises }) => {
     })
       .then((data) => data.json())
       .then((data) => {
-        console.log(data);
-
         navigate(`/training/category/${categoryId}/exercises/${exercisesId}`);
       });
   }
@@ -47,8 +45,6 @@ const Training = ({ admin = false, data, exercises }) => {
   const yourExercises = exercises?.filter(
     (el) => el.category === data[currentIndex].id
   );
-
-  console.log("yourExercises", yourExercises);
 
   return (
     <div>
@@ -124,13 +120,6 @@ const Training = ({ admin = false, data, exercises }) => {
                         el.started_at.length - 3
                       );
 
-                      console.log("CurrentDate", date.getDate());
-                      console.log("CurrentMonth", date.getMonth());
-
-                      console.log("isNextActive", +day);
-
-                      console.log("month", +month);
-
                       return (
                         <div
                           className="w-[100px] py-5 px-5 bg-[#ED563B] text-white font-bold cursor-pointer"
@@ -138,13 +127,13 @@ const Training = ({ admin = false, data, exercises }) => {
                             background:
                               index === 0 ||
                               +month < date.getMonth() + 1 ||
-                              +day <= date.getDate() + 1
+                              +day <= date.getDate()
                                 ? "#ED563B"
                                 : "gray",
                             cursor:
                               index === 0 ||
                               +month < date.getMonth() + 1 ||
-                              +day <= date.getDate() + 1
+                              +day <= date.getDate()
                                 ? "pointer"
                                 : "no-drop",
                           }}
@@ -152,7 +141,7 @@ const Training = ({ admin = false, data, exercises }) => {
                           onClick={() =>
                             index === 0 ||
                             +month < date.getMonth() + 1 ||
-                            +day <= date.getDate() + 1
+                            +day <= date.getDate()
                               ? navigateToExercises2(
                                   data?.[currentIndex]?.id,
                                   el?.id,

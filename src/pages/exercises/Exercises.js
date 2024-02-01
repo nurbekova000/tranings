@@ -25,13 +25,10 @@ export default function Exercises() {
     })
       .then((data) => data.json())
       .then((data) => {
-        // console.log(data);
         setExercise(data);
       });
     // }
   }, []);
-
-  console.log(exercise);
 
   return (
     <>
