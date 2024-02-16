@@ -7,7 +7,7 @@ export default function AdminHeader() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const email = localStorage.getItem("email");
+    const email = sessionStorage.getItem("email");
     if (email) {
       setUser(email);
     }
@@ -18,9 +18,9 @@ export default function AdminHeader() {
   }
 
   function resetAndLogOut() {
-    localStorage.removeItem("email");
-    localStorage.removeItem("auth_token");
-    navigate("/registration");
+    sessionStorage.removeItem("email");
+    sessionStorage.removeItem("auth_token");
+    navigate("/login");
   }
 
   return (

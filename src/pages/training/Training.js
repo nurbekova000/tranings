@@ -12,11 +12,11 @@ const Training = ({ admin = false, data, exercises }) => {
   const date = new Date();
 
   function navigateToExercises(categoryId, exercisesId, el) {
-    const authToken = localStorage.getItem("auth_token");
+    const authToken = sessionStorage.getItem("auth_token");
 
-    localStorage.setItem("exercises", JSON.stringify(el));
+    sessionStorage.setItem("exercises", JSON.stringify(el));
 
-    localStorage.setItem("isEnrolment", JSON.stringify(!!exercises.length));
+    sessionStorage.setItem("isEnrolment", JSON.stringify(!!exercises.length));
 
     const newObj = new FormData();
 
@@ -37,7 +37,7 @@ const Training = ({ admin = false, data, exercises }) => {
   }
 
   function navigateToExercises2(categoryId, exercisesId, el) {
-    localStorage.setItem("exercises", JSON.stringify(el));
+    sessionStorage.setItem("exercises", JSON.stringify(el));
 
     navigate(`/training/category/${categoryId}/exercises/${exercisesId}`);
   }

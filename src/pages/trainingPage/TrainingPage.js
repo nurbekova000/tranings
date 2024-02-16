@@ -11,7 +11,7 @@ export default function TrainingPage() {
   const [isLoading, setLoading] = useState(false);
   const [exercises, setExercises] = useState([]);
 
-  const authToken = localStorage.getItem("auth_token");
+  const authToken = sessionStorage.getItem("auth_token");
 
   useEffect(() => {
     if (!authToken) {

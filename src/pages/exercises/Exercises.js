@@ -11,10 +11,10 @@ export default function Exercises() {
   const [showModal, setShowModal] = useState(false);
   const [oneExercises, setOneExercises] = useState(null);
   const [exercise, setExercise] = useState(null);
-  const authToken = localStorage.getItem("auth_token");
+  const authToken = sessionStorage.getItem("auth_token");
 
   useEffect(() => {
-    setExercises(JSON.parse(localStorage.getItem("exercises")));
+    setExercises(JSON.parse(sessionStorage.getItem("exercises")));
 
     // if (exercisesId === "1") {
     fetch(`https://training.pythonanywhere.com/api/exercises/${exercisesId}`, {

@@ -14,7 +14,7 @@ export default function Authentication() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const authToken = localStorage.getItem("auth_token");
+    const authToken = sessionStorage.getItem("auth_token");
 
     if (authToken) {
       navigate("/training");
@@ -64,8 +64,8 @@ export default function Authentication() {
         const data = response.data;
         if (data.auth_token) {
           setLoading(false);
-          localStorage.setItem("auth_token", data.auth_token);
-          localStorage.setItem("email", authenticationValue.email);
+          sessionStorage.setItem("auth_token", data.auth_token);
+          sessionStorage.setItem("email", authenticationValue.email);
           navigate("/training");
         }
       })
