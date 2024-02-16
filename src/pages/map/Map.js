@@ -27,7 +27,7 @@ const Map = () => {
     newFeedback.append("email", inputData.email);
     newFeedback.append(
       "message",
-      `Номер телефона: ${inputData.phone} \n ФОИ: ${inputData.name} \n Cообщение: ${inputData.message}`
+      `Номер телефона: ${inputData.phone}\nФОИ: ${inputData.name}\nCообщение: ${inputData.message}`
     );
 
     axios
