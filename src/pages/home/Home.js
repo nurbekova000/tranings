@@ -23,7 +23,7 @@ export default function Header() {
               <a href="#map">
                 <Button>становиться участником</Button>
               </a>
-              <a href="#map">
+              <a href="/login">
                 <Button>Дома фитнес</Button>
               </a>
             </div>
