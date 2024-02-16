@@ -14,7 +14,7 @@ export default function HomePage() {
       <Home />
       <Program />
       <Register />
-      <Training />
+      {/* <Training /> */}
       <TeamProfi />
       <Map />
     </>

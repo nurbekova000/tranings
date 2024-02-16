@@ -7,7 +7,7 @@ import trener2 from "../../assets/images/2.jpg";
 
 const TeamProfi = () => {
   return (
-    <div>
+    <div className="pt-[100px]">
       <div id="teamProfi">
         <div className="container">
           <div className="teamProfi">
