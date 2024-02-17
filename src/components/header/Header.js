@@ -32,11 +32,11 @@ export default function Header() {
           </a>
           <div className=" xl:flex  items-center gap-[40px] lg:flex mg:hidden md:hidden sm:hidden s:hidden phone:hidden">
             <a
-              href="/"
+              href="/#"
               className="text-[13px] text-white font-medium uppercase"
               style={{ color: scroll > 520 && "black" }}
             >
-              Дом
+              Главная
             </a>
             <a
               href="#programing"
@@ -46,14 +46,15 @@ export default function Header() {
               Программа
             </a>
             <a
-              href="#traning"
+              href="#teamProfi"
               className="text-[13px] text-white font-medium uppercase"
               style={{ color: scroll > 520 && "black" }}
             >
-              тренировка
+              тренеры
             </a>
+
             <a
-              href="/#"
+              href="/#map"
               className="text-[13px] text-white font-medium uppercase"
               style={{ color: scroll > 520 && "black" }}
             >

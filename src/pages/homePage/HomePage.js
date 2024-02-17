@@ -4,7 +4,6 @@ import Home from "../home/Home";
 import Program from "../program/program";
 import Register from "../register/Register";
 import TeamProfi from "../teamProfi/TeamProfi";
-import Training from "../training/Training";
 import Map from "../map/Map";
 
 export default function HomePage() {
@@ -14,7 +13,6 @@ export default function HomePage() {
       <Home />
       <Program />
       <Register />
-      {/* <Training /> */}
       <TeamProfi />
       <Map />
     </>

@@ -110,7 +110,7 @@ const Training = ({ admin = false, data, exercises }) => {
               )}
 
               {isTraning && (
-                <div className="flex items-start gap-3 ">
+                <div className="flex items-start gap-3 flex-wrap content-start	 ">
                   {yourExercises.length ? (
                     yourExercises.map((el, index) => {
                       const day = el.started_at.slice(el.started_at.length - 2);
@@ -126,22 +126,22 @@ const Training = ({ admin = false, data, exercises }) => {
                           style={{
                             background:
                               index === 0 ||
-                              +month < date.getMonth() + 1 ||
-                              +day <= date.getDate()
+                              ((+month <= date.getMonth() + 1) && 
+                              (+day <= date.getDate()))
                                 ? "#ED563B"
                                 : "gray",
                             cursor:
                               index === 0 ||
-                              +month < date.getMonth() + 1 ||
-                              +day <= date.getDate()
+                              ((+month <= date.getMonth() + 1) && 
+                              (+day <= date.getDate()))
                                 ? "pointer"
                                 : "no-drop",
                           }}
                           key={el.id}
                           onClick={() =>
                             index === 0 ||
-                            +month < date.getMonth() + 1 ||
-                            +day <= date.getDate()
+                            ((+month <= date.getMonth() + 1) && 
+                            (+day <= date.getDate()))
                               ? navigateToExercises2(
                                   data?.[currentIndex]?.id,
                                   el?.id,

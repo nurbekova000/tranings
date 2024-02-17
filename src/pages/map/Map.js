@@ -105,8 +105,8 @@ const Map = () => {
       <div className="conatiner">
         <div className="map">
           <p style={{ textAlign: "center", padding: "30px 0" }}>
-            Copyright © 2020 Training Studio - Designed by{" "}
-            <span>TemplateMo</span>
+            Copyright © 2024 Training Studio - Designed by{" "}
+            <span>Ayana</span>
           </p>
         </div>
       </div>
