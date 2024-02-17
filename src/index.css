@@ -21,4 +21,5 @@ body {
 html,
 body {
   scroll-behavior: smooth;
+  padding-bottom: 30px;
 }

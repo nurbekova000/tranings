@@ -4,14 +4,18 @@ import Button from "../../components/ui/button/Button";
 import topImg from "../../assets/images/line-dec.png";
 import tabsIcon from "../../assets/images/tabs-first-icon.png";
 import "./style/training.css";
+import Loading from "../../components/loading/Loading";
 
 const Training = ({ admin = false, data, exercises }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [loading, setLoading] = useState(false)
   const [isTraning, setTraning] = useState(false);
   const navigate = useNavigate();
   const date = new Date();
 
   function navigateToExercises(categoryId, exercisesId, el) {
+    setLoading(true)
+
     const authToken = sessionStorage.getItem("auth_token");
 
     sessionStorage.setItem("exercises", JSON.stringify(el));
@@ -37,6 +41,7 @@ const Training = ({ admin = false, data, exercises }) => {
   }
 
   function navigateToExercises2(categoryId, exercisesId, el) {
+    setLoading(true)
     sessionStorage.setItem("exercises", JSON.stringify(el));
 
     navigate(`/training/category/${categoryId}/exercises/${exercisesId}`);
@@ -48,12 +53,16 @@ const Training = ({ admin = false, data, exercises }) => {
 
   return (
     <div>
+      {loading && <Loading/>}
+
       <div id="traning">
+
         <div className="container">
           <div
             className="training"
             style={{ padding: !admin ? "125px 0" : "0" }}
           >
+
             {!admin && (
               <div className="training-top">
                 <h1>Тренировка</h1>
@@ -63,6 +72,7 @@ const Training = ({ admin = false, data, exercises }) => {
             )}
             <div className="training-bottom flex  gap-[60px]">
               <div className="training-left flex flex-col gap-[20px]">
+
                 {data?.map((el, index) => (
                   <div
                     onClick={() => {
@@ -88,6 +98,7 @@ const Training = ({ admin = false, data, exercises }) => {
                     запись к нам!
                   </button>
                 )}
+
               </div>
               {!isTraning && (
                 <div className="flex flex-col gap-[20px] items-start">
@@ -111,6 +122,7 @@ const Training = ({ admin = false, data, exercises }) => {
 
               {isTraning && (
                 <div className="flex items-start gap-3 flex-wrap content-start	 ">
+
                   {yourExercises.length ? (
                     yourExercises.map((el, index) => {
                       const day = el.started_at.slice(el.started_at.length - 2);
@@ -187,7 +199,9 @@ const Training = ({ admin = false, data, exercises }) => {
                 </div>
               )}
             </div>
+
           </div>
+
         </div>
       </div>
     </div>
